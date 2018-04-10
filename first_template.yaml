@@ -3,7 +3,7 @@ Resources:
   EC2:
     Type: "AWS::EC2::Instance"
     Properties: 
-      ImageId: "ami-97785bed" # eu-west1 amazon linux AMI
+      ImageId: "ami-97785bed" # us-east 1 amazon linux AMI
       IntanceType: "t.micro"
       Tags:
         - "wordpress_inc"
