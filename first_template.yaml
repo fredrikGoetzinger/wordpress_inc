@@ -12,7 +12,7 @@ Resources:
   S3:
     Type: "AWS::S3::Bucket"
     Properties: 
-      BucketName: "wp-xxxxxx" # To be replaced by unique name.
+      BucketName: "wp-jaws9s8d74jfdX1" # To be replaced by unique name.
       Tags: 
         - "wordpress_inc"
   
