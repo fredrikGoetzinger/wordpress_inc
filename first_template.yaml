@@ -1,10 +1,42 @@
+Parameters: 
+  EnvironmentSize:
+    Type: String
+    Default: SMALL
+    AllowedValues:
+      - SMALL
+      - MEDIUM
+      - LARGE
+    Description: Select environment size (S,M,L)
+
+Mappings:
+  RegionMap:
+    us-east-1:
+      "AMI": "ami-97785bed" 
+    us-east-2:
+      "AMI": "ami-f63b1193"
+    eu-west-1:
+      "AMI": "ami-d834aba1"
+    eu-west-2:
+      "AMI": "ami-403e2524"
+  InstanceSize:
+    SMALL:
+      "EC2": "t2.micro"
+      "DB": "db.t2.micro"
+    MEDIUM:
+      "EC2": "t2.small"
+      "DB": "db.t2.small"
+    LARGE:
+      "EC2": "t2.medium"
+      "DB": "db.t2.medium"
+
+
 Resources: 
   # The EC2 instance running the wordpress site. 
   EC2:
     Type: "AWS::EC2::Instance"
     Properties: 
-      ImageId: "ami-1853ac65" # us-east 1 amazon linux AMI
-      InstanceType: "t2.micro"
+      ImageId: !FindInMap [RegionMap, !Ref "AWS::Region", AMI] # Find correct Linux AMI to use based on current Region.
+      InstanceType: !FindInMap [InstanceSize, !Ref EnvironmentSize, EC2]
       Tags:
         - 
           Key: "Name"
@@ -14,7 +46,6 @@ Resources:
   S3:
     Type: "AWS::S3::Bucket"
     Properties: 
-      BucketName: "wp-jaws9s8d74jfdx1" # To be replaced by unique name.
       Tags: 
         - 
           Key: "Name"
@@ -26,7 +57,7 @@ Resources:
     Properties: 
       AllocatedStorage: 5
       StorageType: "gp2"
-      DBInstanceClass: "db.t2.micro"
+      DBInstanceClass: !FindInMap [InstanceSize, !Ref EnvironmentSize, DB]
       Engine: "mysql"
       MasterUsername: "WordpressUser"
       MasterUserPassword: "W0rdPr355"
