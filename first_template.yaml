@@ -3,18 +3,22 @@ Resources:
   EC2:
     Type: "AWS::EC2::Instance"
     Properties: 
-      ImageId: "ami-97785bed" # us-east 1 amazon linux AMI
-      IntanceType: "t.micro"
+      ImageId: "ami-1853ac65" # us-east 1 amazon linux AMI
+      InstanceType: "t2.micro"
       Tags:
-        - Name: "wordpress_inc"
+        - 
+          Key: "Name"
+          Value:  "wordpress_inc"
 
   # Storage for static pages for the wordpress site.
   S3:
     Type: "AWS::S3::Bucket"
     Properties: 
-      BucketName: "wp-jaws9s8d74jfdX1" # To be replaced by unique name.
+      BucketName: "wp-jaws9s8d74jfdx1" # To be replaced by unique name.
       Tags: 
-        - Name: "wordpress_inc"
+        - 
+          Key: "Name"
+          Value:  "wordpress_inc"
   
   # MySQL database instance for wordpress site data.
   DB:
@@ -27,4 +31,6 @@ Resources:
       MasterUsername: "WordpressUser"
       MasterUserPassword: "W0rdPr355"
       Tags:
-        - Name: "wordpress_inc"
+        - 
+          Key: "Name"
+          Value:  "wordpress_inc"
