@@ -6,7 +6,7 @@ Resources:
       ImageId: "ami-97785bed" # us-east 1 amazon linux AMI
       IntanceType: "t.micro"
       Tags:
-        - "wordpress_inc"
+        - Name: "wordpress_inc"
 
   # Storage for static pages for the wordpress site.
   S3:
@@ -14,7 +14,7 @@ Resources:
     Properties: 
       BucketName: "wp-jaws9s8d74jfdX1" # To be replaced by unique name.
       Tags: 
-        - "wordpress_inc"
+        - Name: "wordpress_inc"
   
   # MySQL database instance for wordpress site data.
   DB:
@@ -27,4 +27,4 @@ Resources:
       MasterUsername: "WordpressUser"
       MasterUserPassword: "W0rdPr355"
       Tags:
-        - "wordpress_inc"
+        - Name: "wordpress_inc"
