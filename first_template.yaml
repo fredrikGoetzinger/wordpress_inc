@@ -1,21 +1,22 @@
 Resources: 
-  # The EC2 instqnce running the wordpress site. 
+  # The EC2 instance running the wordpress site. 
   EC2:
     Type: "AWS::EC2::Instance"
     Properties: 
       ImageId: "ami-97785bed"
       IntanceType: "t.micro"
       Tags:
-        - "myFirstCFInstance"
-        - "wordpress"
+        - "wordpress_inc"
 
-  # Static pages for the wordpress site.
+  # Storage for static pages for the wordpress site.
   S3:
     Type: "AWS::S3::Bucket"
     Properties: 
       BucketName: "wp-xxxxxx" # To be replaced by unique name.
+      Tags: 
+        - "wordpress_inc"
   
-  # MySQL database instance for wordpress site.
+  # MySQL database instance for wordpress site data.
   DB:
     Type: "AWS::RDS::DBInstance"
     Properties: 
@@ -26,5 +27,4 @@ Resources:
       MasterUsername: "WordpressUser"
       MasterUserPassword: "W0rdPr355"
       Tags:
-        - "myRDSInstance"
-        - "wordpress"
+        - "wordpress_inc"
